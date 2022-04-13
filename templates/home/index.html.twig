@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_CUSTOMER') %}
+        <h1>Client</h1>
+    {% elseif is_granted('ROLE_SUPPLIER') %}
+        <h1>Fournisseur</h1>
+    {% else %}
+        <h1>Administrateur</h1>
+    {% endif %}
+{% endblock %}
