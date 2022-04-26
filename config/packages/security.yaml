@@ -39,9 +39,9 @@ security:
     ROLE_SUPPLIER: ROLE_USER
     ROLE_ADMIN: ROLE_ADMIN
   access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
-    - { path: ^/$, roles: ROLE_USER }
+  # - { path: ^/admin, roles: ROLE_ADMIN }
+  # - { path: ^/profile, roles: ROLE_USER }
+#    - { path: ^/$, roles: ROLE_USER }
 
 when@test:
   security:
