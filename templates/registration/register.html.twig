@@ -10,8 +10,8 @@
 
     <h1>Inscription</h1>
 <br>
-    {{ form_row(registrationForm.fullName) }}
     {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.fullName) }}
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.plainPassword)}}
     {{ form_row(registrationForm.roles) }}
