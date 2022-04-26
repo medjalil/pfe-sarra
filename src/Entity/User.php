@@ -19,38 +19,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id = null;
+    private  $id ;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private ?string $email;
+    private  $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    private  $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private string $password;
+    private  $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $fullName;
+    private  $fullName;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private ?bool $isActive = true;
+    private  $isActive = true;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isVerified = false;
+    private  $isVerified = false;
 
     public function getId(): ?int
     {
