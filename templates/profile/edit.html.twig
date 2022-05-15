@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les informations de mon compte{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Modifier les informations de mon compte</h1>
+
+        {{ include('profile/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
+{% endblock %}

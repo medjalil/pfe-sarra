@@ -1,12 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Profile index{% endblock %}
 
 {% block body %}
-<div class="container">
-<h1>Mon compte</h1>
+    <h1>Profile index</h1>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Company</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>PostalCode</th>
+                <th>Mobile</th>
+                <th>VatId</th>
+                <th>Type</th>
+                <th>Bio</th>
+                <th>Activity</th>
+                <th>WebSite</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for profile in profiles %}
+            <tr>
+                <td>{{ profile.id }}</td>
+                <td>{{ profile.company }}</td>
+                <td>{{ profile.phone }}</td>
+                <td>{{ profile.address }}</td>
+                <td>{{ profile.city }}</td>
+                <td>{{ profile.postalCode }}</td>
+                <td>{{ profile.mobile }}</td>
+                <td>{{ profile.vatId }}</td>
+                <td>{{ profile.type }}</td>
+                <td>{{ profile.bio }}</td>
+                <td>{{ profile.activity }}</td>
+                <td>{{ profile.webSite }}</td>
+                <td>{{ profile.createdAt ? profile.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_profile_show', {'id': profile.id}) }}">show</a>
+                    <a href="{{ path('app_profile_edit', {'id': profile.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-
-</div>
+    <a href="{{ path('app_profile_new') }}">Create new</a>
 {% endblock %}

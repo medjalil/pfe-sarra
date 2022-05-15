@@ -39,13 +39,13 @@
             </div>
             <div class="col-md-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                     {% if app.user %}
+                    {% if app.user %}
                         <div class="dropdown">
                             <a href="#" class="text-white dropdown-toggle"
                                data-toggle="dropdown"><i
                                         class="fas fa-user"></i> {{ app.user.fullName|title }}</a>
                             <div class="dropdown-menu rounded-0 mt-3 dropdown-menu-right">
-                                <a href="{{ path('app_profile')}}" class="dropdown-item">Mon compte</a>
+                                <a href="{{ path('app_profile') }}" class="dropdown-item">Mon compte</a>
                                 <a href="#" class="dropdown-item">Mot de passe</a>
                                 <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
                             </div>
@@ -55,8 +55,8 @@
                            class="text-white px-3"><i
                                     class="fas fa-sign-in-alt"></i>
                             Connexion</a>
-                             <span class="text-white">|</span>
-                            <a href="{{ path('app_register') }}"
+                        <span class="text-white">|</span>
+                        <a href="{{ path('app_register') }}"
                            class="text-white px-3"><i
                                     class="fas fa-user-plus"></i>
                             Inscription</a>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
-                   
+
                 </div>
             </div>
         </nav>
@@ -139,6 +139,7 @@
 </div>
 <!-- Under Nav End -->
 <br><br><br>
+
 {% block body %}{% endblock %}
 <br><br><br>
 <!-- Footer Start -->

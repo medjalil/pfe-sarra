@@ -19,38 +19,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private  $id ;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private  $email;
+    private $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private  $roles = [];
+    private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private  $password;
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private  $fullName;
+    private $fullName;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private  $isActive = true;
+    private $isActive = true;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private  $isVerified = false;
+    private $isVerified = false;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Profile::class, mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private $profile;
+
 
     public function getId(): ?int
     {
@@ -173,6 +179,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(Profile $profile): self
+    {
+        // set the owning side of the relation if necessary
+        if ($profile->getOwner() !== $this) {
+            $profile->setOwner($this);
+        }
+
+        $this->profile = $profile;
 
         return $this;
     }

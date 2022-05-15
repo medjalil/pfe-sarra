@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+   {% block title %}
+       Mon Compte
+   {% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>Mon Compte</h1>
+        {% if app.user.profile and is_granted('ROLE_CUSTOMER') %}
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ app.user.profile.id }}</td>
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ app.user.profile.phone }}</td>
+                </tr>
+                </tbody>
+            </table>
+        {% elseif  app.user.profile and is_granted('ROLE_SUPPLIER') %}
+            <th>Company</th>
+            <td>{{ app.user.profile.company }}</td>
+        {% else %}
+            <div class="text-center">
+                <a href="{{ path('app_profile_new') }}" class="btn btn-primary">Remplir mes informations</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+
