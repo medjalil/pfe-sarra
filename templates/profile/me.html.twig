@@ -6,22 +6,40 @@
     <div class="container">
         <h1>Mon Compte</h1>
         {% if app.user.profile and is_granted('ROLE_CUSTOMER') %}
-
-            <table class="table">
+            <table class="table table-borderless">
                 <tbody>
                 <tr>
-                    <th>Id</th>
-                    <td>{{ app.user.profile.id }}</td>
+                    <th>Nom et prénom</th>
+                    <td>{{ app.user.fullName|title }}</td>
                 </tr>
                 <tr>
-
-                </tr>
-                <tr>
-                    <th>Phone</th>
+                    <th>Téléphone</th>
                     <td>{{ app.user.profile.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse de messagerie</th>
+                    <td>{{ app.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ app.user.profile.address }}</td>
+                </tr>
+                <tr>
+                    <th>Code postal</th>
+                    <td>{{ app.user.profile.postalCode }}</td>
+                </tr>
+                <tr>
+                    <th>Gouvernorat</th>
+                    <td>{{ app.user.profile.city }}</td>
                 </tr>
                 </tbody>
             </table>
+            <div class="text-left">
+                <a href="{{ path('app_profile_edit',{'id':app.user.profile.id}) }}" class="btn btn-primary">Modifier mes
+                    informations</a>
+                <a href="{{ path('app_profile_change_password') }}" class="btn btn-secondary">Changer
+                    Mot de passe</a>
+            </div>
         {% elseif  app.user.profile and is_granted('ROLE_SUPPLIER') %}
             <th>Company</th>
             <td>{{ app.user.profile.company }}</td>

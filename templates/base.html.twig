@@ -46,7 +46,8 @@
                                         class="fas fa-user"></i> {{ app.user.fullName|title }}</a>
                             <div class="dropdown-menu rounded-0 mt-3 dropdown-menu-right">
                                 <a href="{{ path('app_profile') }}" class="dropdown-item">Mon compte</a>
-                                <a href="#" class="dropdown-item">Mot de passe</a>
+                                <a href="{{ path('app_profile_change_password') }}" class="dropdown-item">Mot de
+                                    passe</a>
                                 <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
                             </div>
                         </div>
