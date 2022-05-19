@@ -31,7 +31,7 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
             $entityManager->flush();
-            $this->addFlash('success', 'Password changed');
+            $this->addFlash('success', 'Mot de passe changé');
 
             return $this->redirectToRoute('app_profile');
         }

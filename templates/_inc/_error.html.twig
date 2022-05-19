@@ -1,0 +1,9 @@
+<div class="container">
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                <i class="{% if type == 'success' %} fas fa-check-circle message-success {% else %}fas fa-times-circle message-danger{% endif %}"></i> {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande index{% endblock %}
+
+{% block body %}
+    <h1>Demande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Budget</th>
+                <th>StartAt</th>
+                <th>EndAt</th>
+                <th>LimitAt</th>
+                <th>Address</th>
+                <th>PostalCode</th>
+                <th>City</th>
+                <th>CreatedAt</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                <td>{{ demande.id }}</td>
+                <td>{{ demande.title }}</td>
+                <td>{{ demande.description }}</td>
+                <td>{{ demande.budget }}</td>
+                <td>{{ demande.startAt ? demande.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ demande.endAt ? demande.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ demande.limitAt ? demande.limitAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ demande.address }}</td>
+                <td>{{ demande.postalCode }}</td>
+                <td>{{ demande.city }}</td>
+                <td>{{ demande.createdAt ? demande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ demande.status }}</td>
+                <td>
+                    <a href="{{ path('app_demande_show', {'id': demande.id}) }}">show</a>
+                    <a href="{{ path('app_demande_edit', {'id': demande.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_demande_new') }}">Create new</a>
+{% endblock %}

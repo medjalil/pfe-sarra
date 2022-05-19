@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+    <h1>Demande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demande.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ demande.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ demande.description }}</td>
+            </tr>
+            <tr>
+                <th>Budget</th>
+                <td>{{ demande.budget }}</td>
+            </tr>
+            <tr>
+                <th>StartAt</th>
+                <td>{{ demande.startAt ? demande.startAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndAt</th>
+                <td>{{ demande.endAt ? demande.endAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LimitAt</th>
+                <td>{{ demande.limitAt ? demande.limitAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ demande.address }}</td>
+            </tr>
+            <tr>
+                <th>PostalCode</th>
+                <td>{{ demande.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ demande.city }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ demande.createdAt ? demande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ demande.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_demande_index') }}">back to list</a>
+
+    <a href="{{ path('app_demande_edit', {'id': demande.id}) }}">edit</a>
+
+    {{ include('demande/_delete_form.html.twig') }}
+{% endblock %}

@@ -51,6 +51,7 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $profile->setOwner($user);
             $profileRepository->add($profile);
+            $this->addFlash('success', 'Votre compte mise à jour avec success');
             return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -80,6 +81,7 @@ class ProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $profileRepository->add($profile);
+            $this->addFlash('success', 'Votre compte mise à jour avec success');
             return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         }
 
