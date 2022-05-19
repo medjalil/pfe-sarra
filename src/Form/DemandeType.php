@@ -23,9 +23,7 @@ class DemandeType extends AbstractType
             ->add('city')
             ->add('createdAt')
             ->add('status')
-            ->add('createdBy')
-            ->add('subCategory')
-        ;
+            ->add('subCategory');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
