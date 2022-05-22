@@ -1,0 +1,7 @@
+{% if status == 'Publiée' %}
+    <span class="badge badge-success">{{ status }}</span>
+{% elseif status == 'Rservée' %}
+    <span class="badge badge-info">{{ status }}</span>
+{% elseif status == 'Cloturée' %}
+    <span class="badge badge-secondary">{{ status }}</span>
+{% endif %}

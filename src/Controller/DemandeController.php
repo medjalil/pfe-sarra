@@ -20,8 +20,9 @@ class DemandeController extends AbstractController
      */
     public function index(DemandeRepository $demandeRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('demande/index.html.twig', [
-            'demandes' => $demandeRepository->findAll(),
+            'demandes' => $demandeRepository->findBy(['createdBy' => $user]),
         ]);
     }
 
@@ -35,7 +36,10 @@ class DemandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $demande->setCreatedBy($this->getUser());
+            $demande->setStatus('Publiée');
             $demandeRepository->add($demande);
+            $this->addFlash('success', 'Demande bien ajoutée');
             return $this->redirectToRoute('app_demande_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,6 +69,7 @@ class DemandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $demandeRepository->add($demande);
+            $this->addFlash('success', 'Demande bien modifiée');
             return $this->redirectToRoute('app_demande_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -79,8 +84,9 @@ class DemandeController extends AbstractController
      */
     public function delete(Request $request, Demande $demande, DemandeRepository $demandeRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$demande->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $demande->getId(), $request->request->get('_token'))) {
             $demandeRepository->remove($demande);
+            $this->addFlash('success', 'Demande supprimée');
         }
 
         return $this->redirectToRoute('app_demande_index', [], Response::HTTP_SEE_OTHER);

@@ -2,7 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\City;
+use App\Entity\SubCategory;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -49,6 +51,16 @@ class AppFixtures extends Fixture
             $city = (new City())->setName($city);
             $manager->persist($city);
         }
+        for ($i = 0; $i < 10; $i++) {
+            $category = (new Category())->setName($faker->company);
+            $manager->persist($category);
+            for ($j = 0; $j < 7; $j++) {
+                $subCategory = (new SubCategory())->setName($faker->name)->setCategory($category);
+                $manager->persist($subCategory);
+            }
+        }
+
+
         $manager->flush();
     }
 }

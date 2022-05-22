@@ -4,7 +4,13 @@
    {% endblock %}
 {% block body %}
     <div class="container">
-        <h1>Mon Compte</h1>
+        <h1>Mon Compte
+            {% if app.user.profile and is_granted('ROLE_CUSTOMER') %}
+                (Client)
+            {% elseif  app.user.profile and is_granted('ROLE_SUPPLIER') %}
+                (Fournisseur)
+            {% endif %}
+        </h1>
         {% if app.user.profile and is_granted('ROLE_CUSTOMER') %}
             <table class="table table-borderless">
                 <tbody>

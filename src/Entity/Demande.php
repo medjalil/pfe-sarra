@@ -57,10 +57,6 @@ class Demande
      */
     private $postalCode;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
 
     /**
      * @ORM\Column(type="datetime")
@@ -83,6 +79,17 @@ class Demande
      * @ORM\JoinColumn(nullable=false)
      */
     private $subCategory;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="demandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -185,17 +192,6 @@ class Demande
         return $this;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -241,6 +237,18 @@ class Demande
     public function setSubCategory(?SubCategory $subCategory): self
     {
         $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

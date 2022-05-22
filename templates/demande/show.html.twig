@@ -3,14 +3,11 @@
 {% block title %}Demande{% endblock %}
 
 {% block body %}
-    <h1>Demande</h1>
+    <div class="container">
+        <h1>Afficher demande</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ demande.id }}</td>
-            </tr>
+        <table class="table table-striped">
+            <tbody>
             <tr>
                 <th>Title</th>
                 <td>{{ demande.title }}</td>
@@ -21,7 +18,7 @@
             </tr>
             <tr>
                 <th>Budget</th>
-                <td>{{ demande.budget }}</td>
+                <td>{{ demande.budget }}€</td>
             </tr>
             <tr>
                 <th>StartAt</th>
@@ -55,13 +52,13 @@
                 <th>Status</th>
                 <td>{{ demande.status }}</td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <th>Category</th>
+                <td>{{ demande.subCategory }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('app_demande_index') }}">back to list</a>
 
-    <a href="{{ path('app_demande_edit', {'id': demande.id}) }}">edit</a>
-
-    {{ include('demande/_delete_form.html.twig') }}
-  
 {% endblock %}

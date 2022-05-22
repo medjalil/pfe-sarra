@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Demande{% endblock %}
+{% block title %}Nouvelle demande{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1> créer un Demande</h1>
-<br></br>
-    {{ include('demande/_form.html.twig') }}
-
-    
+    <div class="container">
+        <h1>Créer une demande</h1>
+        <br>
+        {{ include('demande/_form.html.twig') }}
     </div>
 {% endblock %}

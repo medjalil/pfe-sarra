@@ -29,9 +29,15 @@ class City
      */
     private $profiles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Demande::class, mappedBy="city")
+     */
+    private $demandes;
+
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,5 +90,35 @@ class City
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Demande>
+     */
+    public function getDemandes(): Collection
+    {
+        return $this->demandes;
+    }
+
+    public function addDemande(Demande $demande): self
+    {
+        if (!$this->demandes->contains($demande)) {
+            $this->demandes[] = $demande;
+            $demande->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): self
+    {
+        if ($this->demandes->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getCity() === $this) {
+                $demande->setCity(null);
+            }
+        }
+
+        return $this;
     }
 }

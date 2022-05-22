@@ -3,53 +3,54 @@
 {% block title %}Demande index{% endblock %}
 
 {% block body %}
-    <h1>Demande index</h1>
+    <div class="container">
+        <h1>Mes demandes
+            <a href="{{ path('app_demande_new') }}" class="btn btn-primary float-right">Ajouter une demande</a>
+        </h1>
 
-    <table class="table">
-        <thead>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Budget</th>
-                <th>StartAt</th>
-                <th>EndAt</th>
-                <th>LimitAt</th>
-                <th>Address</th>
-                <th>PostalCode</th>
-                <th>City</th>
-                <th>CreatedAt</th>
-                <th>Status</th>
-                <th>actions</th>
+                <th>Titre (Budget)</th>
+                <th>Date de départ</th>
+                <th>Date limite</th>
+                <th>Crée le</th>
+                <th>Statut</th>
+                <th></th>
+                <th></th>
             </tr>
-        </thead>
-        <tbody>
-        {% for demande in demandes %}
-            <tr>
-                <td>{{ demande.id }}</td>
-                <td>{{ demande.title }}</td>
-                <td>{{ demande.description }}</td>
-                <td>{{ demande.budget }}</td>
-                <td>{{ demande.startAt ? demande.startAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ demande.endAt ? demande.endAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ demande.limitAt ? demande.limitAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ demande.address }}</td>
-                <td>{{ demande.postalCode }}</td>
-                <td>{{ demande.city }}</td>
-                <td>{{ demande.createdAt ? demande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ demande.status }}</td>
-                <td>
-                    <a href="{{ path('app_demande_show', {'id': demande.id}) }}">show</a>
-                    <a href="{{ path('app_demande_edit', {'id': demande.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for demande in demandes %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_demande_show', {'id': demande.id}) }}"> {{ demande.title }}
+                            ({{ demande.budget }}€)
+                        </a>
+                    </td>
+                    <td>{{ demande.startAt ? demande.startAt|date('d/m/Y') : '' }}</td>
+                    <td>{{ demande.limitAt ? demande.limitAt|date('d/m/Y') : '' }}</td>
+                    <td>{{ demande.createdAt ? demande.createdAt|date('d/m/Y') : '' }}</td>
+                    <td>{% include'demande/_status.html.twig' with { status: demande.status } %}</td>
+                    <td><span class="badge badge-secondary">0</span></td>
+                    <td>
+                        <a href="{{ path('app_demande_edit', {'id': demande.id}) }}"><i class="fa fa-edit"></i></a>
 
-    <a href="{{ path('app_demande_new') }}">Create new</a>
+                        <a href="" data-toggle="modal"
+                           data-target="#deleteModal-{{ demande.id }}">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+                        {{ include('demande/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr class="text-center text-danger bg-light">
+                    <td colspan="13">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
 {% endblock %}
