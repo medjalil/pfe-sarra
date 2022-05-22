@@ -3,9 +3,11 @@
 {% block title %}New Demande{% endblock %}
 
 {% block body %}
-    <h1>Create new Demande</h1>
-
+<div class="container">
+    <h1> créer un Demande</h1>
+<br></br>
     {{ include('demande/_form.html.twig') }}
 
-    <a href="{{ path('app_demande_index') }}">back to list</a>
+    
+    </div>
 {% endblock %}
