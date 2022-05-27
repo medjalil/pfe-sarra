@@ -20,9 +20,9 @@ class DemandeController extends AbstractController
      */
     public function index(DemandeRepository $demandeRepository): Response
     {
-        $user = $this->getUser();
+
         return $this->render('demande/index.html.twig', [
-            'demandes' => $demandeRepository->findBy(['createdBy' => $user]),
+            'demandes' => $demandeRepository->findAll(),
         ]);
     }
 

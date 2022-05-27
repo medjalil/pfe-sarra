@@ -5,7 +5,9 @@
 {% block body %}
     <div class="container">
         <h1>Mes demandes
-            <a href="{{ path('app_demande_new') }}" class="btn btn-primary float-right">Ajouter une demande</a>
+            {% if is_granted('ROLE_CUSTOMER') %}
+                <a href="{{ path('app_demande_new') }}" class="btn btn-primary float-right">Ajouter une demande</a>
+            {% endif %}
         </h1>
 
         <table class="table table-striped">
@@ -25,22 +27,32 @@
                 <tr>
                     <td>
                         <a href="{{ path('app_demande_show', {'id': demande.id}) }}"> {{ demande.title }}
-                            ({{ demande.budget }}€)
+                            ({{ demande.budget }}TND)
                         </a>
                     </td>
                     <td>{{ demande.startAt ? demande.startAt|date('d/m/Y') : '' }}</td>
                     <td>{{ demande.limitAt ? demande.limitAt|date('d/m/Y') : '' }}</td>
                     <td>{{ demande.createdAt ? demande.createdAt|date('d/m/Y') : '' }}</td>
                     <td>{% include'demande/_status.html.twig' with { status: demande.status } %}</td>
-                    <td><span class="badge badge-secondary">0</span></td>
+                    <td><span class="badge badge-secondary">{{ demande.comments|length }}</span></td>
                     <td>
-                        <a href="{{ path('app_demande_edit', {'id': demande.id}) }}"><i class="fa fa-edit"></i></a>
+                        {% if demande.createdBy == app.user %}
+                            <a href="{{ path('app_demande_edit', {'id': demande.id}) }}"><i class="fa fa-edit"></i></a>
 
-                        <a href="" data-toggle="modal"
-                           data-target="#deleteModal-{{ demande.id }}">
-                            <i class="fa fa-trash-alt"></i>
-                        </a>
-                        {{ include('demande/_delete_form.html.twig') }}
+                            <a href="" data-toggle="modal"
+                               data-target="#deleteModal-{{ demande.id }}">
+                                <i class="fa fa-trash-alt"></i>
+                            </a>
+                            {{ include('demande/_delete_form.html.twig') }}
+                        {% endif %}
+                        {% if is_granted('ROLE_SUPPLIER') %}
+                            {% for comment in demande.comments |filter(comment => comment.createdBy == app.user) %}
+                                --
+                            {% else %}
+                                <a href="{{ path('app_comment_new', {'id': demande.id}) }}"><i
+                                            class="fa fa-plus"></i></a>
+                            {% endfor %}
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}

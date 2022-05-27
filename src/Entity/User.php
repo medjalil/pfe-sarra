@@ -64,9 +64,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $demandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="createdBy")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -236,6 +242,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($demande->getCreatedBy() === $this) {
                 $demande->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getCreatedBy() === $this) {
+                $comment->setCreatedBy(null);
             }
         }
 

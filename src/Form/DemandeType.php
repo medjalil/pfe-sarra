@@ -30,7 +30,8 @@ class DemandeType extends AbstractType
             ])
             ->add('budget', MoneyType::class, [
                 'required' => true,
-                'label' => 'Budget'
+                'label' => 'Budget',
+                'currency' => 'TND'
             ])
             ->add('address', TextareaType::class, [
                 'required' => true,
