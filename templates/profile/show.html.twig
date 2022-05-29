@@ -3,24 +3,33 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-    <h1>Profile</h1>
+    <div class="container">
+        <h1>Profile de l'entreprise</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table table-borderless">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ profile.id }}</td>
-            </tr>
-            <tr>
-                <th>Company</th>
+                <th>Nom de l'entreprise</th>
                 <td>{{ profile.company }}</td>
             </tr>
             <tr>
-                <th>Phone</th>
+                <th>Biographie</th>
+                <td>{{ profile.bio }}</td>
+            </tr>
+            <tr>
+                <th>Type de l'entreprise</th>
+                <td>{{ profile.type }}</td>
+            </tr>
+            <tr>
+                <th>Activité</th>
+                <td>{{ profile.activity }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
                 <td>{{ profile.phone }}</td>
             </tr>
             <tr>
-                <th>Address</th>
+                <th>Adresse</th>
                 <td>{{ profile.address }}</td>
             </tr>
             <tr>
@@ -28,43 +37,22 @@
                 <td>{{ profile.city }}</td>
             </tr>
             <tr>
-                <th>PostalCode</th>
+                <th>Code Postal</th>
                 <td>{{ profile.postalCode }}</td>
             </tr>
             <tr>
-                <th>Mobile</th>
+                <th>Portable</th>
                 <td>{{ profile.mobile }}</td>
             </tr>
             <tr>
-                <th>VatId</th>
+                <th>Matricule fiscale</th>
                 <td>{{ profile.vatId }}</td>
             </tr>
             <tr>
-                <th>Type</th>
-                <td>{{ profile.type }}</td>
-            </tr>
-            <tr>
-                <th>Bio</th>
-                <td>{{ profile.bio }}</td>
-            </tr>
-            <tr>
-                <th>Activity</th>
-                <td>{{ profile.activity }}</td>
-            </tr>
-            <tr>
-                <th>WebSite</th>
+                <th>Site Web</th>
                 <td>{{ profile.webSite }}</td>
             </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ profile.createdAt ? profile.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_profile_index') }}">back to list</a>
-
-    <a href="{{ path('app_profile_edit', {'id': profile.id}) }}">edit</a>
-
-    {{ include('profile/_delete_form.html.twig') }}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

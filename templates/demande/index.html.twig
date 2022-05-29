@@ -4,7 +4,12 @@
 
 {% block body %}
     <div class="container">
-        <h1>Mes demandes
+        <h1>
+            {% if is_granted('ROLE_CUSTOMER') %}
+                Mes demandes
+            {% else %}
+                Liste des demandes
+            {% endif %}
             {% if is_granted('ROLE_CUSTOMER') %}
                 <a href="{{ path('app_demande_new') }}" class="btn btn-primary float-right">Ajouter une demande</a>
             {% endif %}
@@ -47,7 +52,7 @@
                         {% endif %}
                         {% if is_granted('ROLE_SUPPLIER') %}
                             {% for comment in demande.comments |filter(comment => comment.createdBy == app.user) %}
-                                --
+                                Envoyé
                             {% else %}
                                 <a href="{{ path('app_comment_new', {'id': demande.id}) }}"><i
                                             class="fa fa-plus"></i></a>

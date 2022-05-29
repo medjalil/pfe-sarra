@@ -22,22 +22,25 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $customer = new User();
-        $customer->setFullName($faker->name);
-        $customer->setEmail('customer@example.com');
-        $customer->setPassword($this->passwordHasher->hashPassword($customer, 'password'));
-        $customer->setIsActive(true);
-        $customer->setRoles(['ROLE_CUSTOMER']);
-        $manager->persist($customer);
+        for ($k = 1; $k < 5; $k++) {
+            $customer = new User();
+            $customer->setFullName($faker->name);
+            $customer->setEmail('customer' . $k . '@example.com');
+            $customer->setPassword($this->passwordHasher->hashPassword($customer, 'password'));
+            $customer->setIsActive(true);
+            $customer->setRoles(['ROLE_CUSTOMER']);
+            $manager->persist($customer);
+        }
 
-        $supplier = new User();
-        $supplier->setFullName($faker->name);
-        $supplier->setEmail('supplier@example.com');
-        $supplier->setPassword($this->passwordHasher->hashPassword($supplier, 'password'));
-        $supplier->setIsActive(true);
-        $supplier->setRoles(['ROLE_SUPPLIER']);
-        $manager->persist($supplier);
-
+        for ($l = 1; $l < 5; $l++) {
+            $supplier = new User();
+            $supplier->setFullName($faker->name);
+            $supplier->setEmail('supplier' . $l . '@example.com');
+            $supplier->setPassword($this->passwordHasher->hashPassword($supplier, 'password'));
+            $supplier->setIsActive(true);
+            $supplier->setRoles(['ROLE_SUPPLIER']);
+            $manager->persist($supplier);
+        }
         $admin = new User();
         $admin->setFullName($faker->name);
         $admin->setEmail('admin@example.com');

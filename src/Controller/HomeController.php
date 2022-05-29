@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Demande;
 use App\Form\ChangePasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,4 +41,15 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/accept", name="app_accept_offer")
+     */
+    public function accept(Demande $demande, EntityManagerInterface $entityManager): Response
+    {
+        $demande->setStatus('Réservée');
+        $entityManager->flush();
+        return $this->render('home/index.html.twig');
+    }
+
 }

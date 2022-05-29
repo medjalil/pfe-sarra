@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileType extends AbstractType
 {
@@ -41,7 +43,11 @@ class ProfileType extends AbstractType
                 ])
                 ->add('postalCode', IntegerType::class, [
                     'required' => true,
-                    'label' => 'Code postal'
+                    'label' => 'Code postal',
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(4),
+                    ],
 
                 ])
                 ->add('city', EntityType::class, [
