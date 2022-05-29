@@ -49,7 +49,7 @@ class HomeController extends AbstractController
     {
         $demande->setStatus('Réservée');
         $entityManager->flush();
-        return $this->render('home/index.html.twig');
+        return $this->redirectToRoute('app_home');
     }
 
 }
