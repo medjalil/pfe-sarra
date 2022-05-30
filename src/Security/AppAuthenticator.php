@@ -21,7 +21,6 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-   
 
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
@@ -48,7 +47,10 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
+        $user = $token->getUser();
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
         return new RedirectResponse($this->urlGenerator->generate('app_profile'));
 
     }
